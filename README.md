@@ -4,7 +4,7 @@
 # 运行方式
 1. 有mysql服务器
 2. 在mysql服务器中创建3张表
-
+```
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(64) DEFAULT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE `phone_user` (
   CONSTRAINT `phone_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `phone_user_ibfk_2` FOREIGN KEY (`phone_id`) REFERENCES `phone` (`id`)
 )
-
+```
 3. 往user表中插入用户名和对应的inviteKey。用户名随意，inviteKey必须是正确的。
 比如  insert into user(username,inviteKey) values('xx','xxxxxxxx');
 
