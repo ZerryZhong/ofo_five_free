@@ -2,7 +2,7 @@
 参考项目  https://github.com/linlin1988/ofo_five_free
 
 
-https://github.com/ZerryZhong/ofo_five_free/blob/master/ofo.jpg
+![优惠券](https://github.com/liuhuakun/BrushShots/blob/master/1.PNG)
 
 如何获得自己的invitekey
 电脑网页版打开 https://ofo-misc.ofo.com/pay/index.html#/ 进行登录 
