@@ -33,7 +33,7 @@ CREATE TABLE `phone_user` (
 ```
 
 3. 往user表中插入用户名和对应的inviteKey。用户名随意，inviteKey必须是正确的。</br>
-比如  insert into user(username,inviteKey) values('xx','xxxxxxxx'); </br>
+   比如  insert into user(username,inviteKey) values('xx','xxxxxxxx');  </br>
 
 4.更改ofo.py文件，将mysql服务器改为真实的信息</br>
 
