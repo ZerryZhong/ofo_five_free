@@ -5,20 +5,19 @@
 """
 假设有两个用户，存放在表user中
 每隔随机秒随机生成一个11位的电话号码，开始判断
-  1. 如果该用户之前没有使用给该电话号码发送过邀请信息，给该电话号码发送，并将该电话号码记录到phone表中，并且在phone_user表中记录用户与电话号码的关联
-  2. 如果该用户之前使用过该电话号码,则跳过，开始下次循环
+  1. 如果该用户之前没有使用给该电话号码发送过邀请信息，则给该电话号码发送，并将该电话号码记录到phone表中，并且在phone_user表中记录用户与电话号码的关联
+  2. 如果该用户之前使用过该电话号码,则跳过，开始下次循环（判断方法：phone表中是否有该号码，phone_user表中是否有该号码和该用户的关联关系）
 
-因为只有两个用户，我想启动多进程模式，启动两个进程，每个进程跑一个用户的这种循环
+因为只有两个用户，启动多进程模式，启动两个进程，每个进程跑一个用户的这种循环
 
 设计表，有三张表，user表存在用户名，phone表存放使用过的电话号码，phone_user表做user和phone之间的关联，类似于多对多的关系
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(64) DEFAULT NULL,
   `inviteKey` varchar(64) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `inviteKey` (`inviteKey`)
-)
+);
 
  select * from user ;
 +----+--------------+-----------
@@ -32,7 +31,7 @@ CREATE TABLE `phone` (
   `phone_number` char(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `phone_number` (`phone_number`)
-)
+);
 
 CREATE TABLE `phone_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -43,7 +42,7 @@ CREATE TABLE `phone_user` (
   KEY `phone_id` (`phone_id`),
   CONSTRAINT `phone_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `phone_user_ibfk_2` FOREIGN KEY (`phone_id`) REFERENCES `phone` (`id`)
-)
+);
 """
 
 import requests
@@ -256,8 +255,6 @@ if __name__ == '__main__':
     pool = Pool(rownumber)
     for username, inviteKey in user_key:
         pool.apply_async(main, (username, inviteKey, ))
-        #pool.apply_async(main, (ofomysql1, 'xiaolingling', 'ca0e2a58032dbd7dc846ec58c7033206', phonenumber,))
-
     pool.close()
     pool.join()
 
