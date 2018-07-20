@@ -31,6 +31,7 @@ CREATE TABLE `phone_user` (
   CONSTRAINT `phone_user_ibfk_2` FOREIGN KEY (`phone_id`) REFERENCES `phone` (`id`)
 );
 ```
+
 3. 往user表中插入用户名和对应的inviteKey。用户名随意，inviteKey必须是正确的。</br>
 比如  insert into user(username,inviteKey) values('xx','xxxxxxxx'); </br>
 
